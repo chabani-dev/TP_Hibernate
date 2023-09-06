@@ -2,13 +2,17 @@ package fr.doranco.hibernate.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -54,14 +58,21 @@ public class User  implements Serializable{
 	@JoinColumn(name = "adresse_id" , nullable = false)
 	private Adresse adresse;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Commande> commandes;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+	
 	
 	public User() {
 		
 	}
 
-
 	public User(int id, String nom, String prenom, Date dateNaissance, boolean isActive, String email, String password,
-			Adresse adresse) {
+			Adresse adresse, List<Commande> commandes) {
+		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -70,7 +81,9 @@ public class User  implements Serializable{
 		this.email = email;
 		this.password = password;
 		this.adresse = adresse;
+		this.commandes = commandes;
 	}
+
 
 
 	public int getId() {
@@ -146,8 +159,13 @@ public class User  implements Serializable{
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+	
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
 
 
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance

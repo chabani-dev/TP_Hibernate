@@ -25,6 +25,7 @@ public class Adresse implements Serializable {
 
 	@Column(name = "numero", length = 4, nullable = false)
 	private String numero;
+	
 	@Column(name = "rue", length = 45, nullable = false)
 	private String rue;
 
