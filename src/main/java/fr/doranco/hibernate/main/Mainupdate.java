@@ -9,25 +9,23 @@ import fr.doranco.hibernate.utils.Dates;
 public class Mainupdate {
 
 	public static void main(String[] args) {
-		
+
 		try {
-			IUserDao userDao = new UserDao();
-			userDao.getUser(1);
-			user.setNom("zarga");
-            user.getAdresse().setVille("créteil");
-            userDao.updateUser(user); 
-            System.out.println(user);
-            
-            
+//			IUserDao userDao = new UserDao();
+//			userDao.getUser(1);
+//			user.setNom("zarga");
+//			user.getAdresse().setVille("créteil");
+//			userDao.updateUser(user);
+//			System.out.println(user);
 
-	}catch (Exception e) {
+		} catch (Exception e) {
 
-		e.printStackTrace();
+			e.printStackTrace();
+
+		}
+
+		System.exit(0);
 
 	}
-
-	System.exit(0);
-
-}
 
 }

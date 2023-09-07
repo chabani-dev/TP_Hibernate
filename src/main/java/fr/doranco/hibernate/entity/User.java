@@ -1,6 +1,7 @@
 package fr.doranco.hibernate.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,12 +19,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
 @Table(name = "user")
-public class User  implements Serializable{
+public class User implements Serializable {
 
-	
 	/**
 	 * 
 	 */
@@ -32,147 +31,117 @@ public class User  implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	
-	@Column(name = "nom" , length = 25, nullable= false)
+
+	@Column(name = "nom", length = 25, nullable = false)
 	private String nom;
-	
-	@Column(name = "prenom" , length = 25, nullable = false)
+
+	@Column(name = "prenom", length = 25, nullable = false)
 	private String prenom;
-	
-	@Column(name= "date_naissance" , nullable = false)
+
+	@Column(name = "date_naissance", nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date dateNaissance ;
-	
-	@Column(name= "isActive" , nullable = false)
-	private  boolean isActive ;
-	
-	@Column(name= "email" , nullable = false)
-	private  String email ;
-	
-	@Column(name= "password" , nullable = false)
-	private String password ;
-	
-	
-	
+	private Date dateNaissance;
+
+	@Column(name = "isActive", nullable = false)
+	private boolean isActive;
+
+	@Column(name = "email", nullable = false)
+	private String email;
+
+	@Column(name = "password", nullable = false)
+	private String password;
+
 	@OneToOne
-	@JoinColumn(name = "adresse_id" , nullable = false)
+	@JoinColumn(name = "adresse_id", nullable = false)
 	private Adresse adresse;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Commande> commandes;
-	
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
-	
-	
+
 	public User() {
-		
+
 	}
 
-	public User(int id, String nom, String prenom, Date dateNaissance, boolean isActive, String email, String password,
-			Adresse adresse, List<Commande> commandes) {
-		super();
-		this.id = id;
+	public User(String nom, String prenom, Date dateNaissance, boolean isActive, String email, String password,
+			List<Commande> commandes) {
+
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateNaissance = dateNaissance;
 		this.isActive = isActive;
 		this.email = email;
 		this.password = password;
-		this.adresse = adresse;
-		this.commandes = commandes;
+		this.commandes = new ArrayList<Commande>();
 	}
-
-
 
 	public int getId() {
 		return id;
 	}
 
-
 	public String getNom() {
 		return nom;
 	}
-
 
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
-
 	public String getPrenom() {
 		return prenom;
 	}
-
 
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
-
 	public Date getDateNaissance() {
 		return dateNaissance;
 	}
-
 
 	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
-
 	public Adresse getAdresse() {
 		return adresse;
 	}
-
 
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
 	public boolean isActive() {
 		return isActive;
 	}
 
-
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	
+
 	public List<Commande> getCommandes() {
 		return commandes;
 	}
 
-
-	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
 				+ ", isActive=" + isActive + ", email=" + email + ", password=" + password + "]";
-	} 
-	
-	
-	
-	
+	}
+
 }

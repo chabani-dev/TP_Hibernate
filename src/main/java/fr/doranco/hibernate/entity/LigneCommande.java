@@ -43,12 +43,10 @@ public class LigneCommande implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "commande")
 	private List<LigneCommande> listesligneCommandes;
-	
-	
+		
 	public LigneCommande() {
 		
 	}
-
 
 	public LigneCommande(int id, String titreArticle, Float prixArticle, int quantite,
 			List<LigneCommande> listesligneCommandes) {
